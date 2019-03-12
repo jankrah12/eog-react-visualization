@@ -17,16 +17,6 @@ import * as actions from "../actions";
 
 */
 
-function* watchFetchDroneData() {
-  const { error, data } = yield call(API.getDroneData);
-  if (error) {
-    yield put({ type: actions.API_ERROR, code: error.code });
-    yield cancel();
-    return;
-  }
-  yield put({ type: actions.DRONE_DATA_RECEIVED, data });
-}
-
 function* watchWeatherIdReceived(action) {
   const { id } = action;
   const { error, data } = yield call(API.findWeatherbyId, id);
@@ -61,7 +51,6 @@ function* watchFetchWeather(action) {
 
 function* watchAppLoad() {
   yield all([
-    takeEvery(actions.FETCH_DRONE_DATA, watchFetchDroneData),
     takeEvery(actions.FETCH_WEATHER, watchFetchWeather),
     takeEvery(actions.WEATHER_ID_RECEIVED, watchWeatherIdReceived)
   ]);

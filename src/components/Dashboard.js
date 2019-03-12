@@ -154,10 +154,12 @@ const mapState = (state, ownProps) => {
     latitude,
     weather_state_name,
     temperatureinFahrenheit,
+  } = state.weather;
+  const {
     metricTimestamp,
     metricTemperature,
     currentMetrics,
-  } = state.weather;
+  } = state.drone;
   return {
     loading,
     name,
@@ -174,7 +176,7 @@ const mapState = (state, ownProps) => {
 const mapDispatch = dispatch => ({
   fetchDroneData: (() => 
     dispatch({
-      type: actions.FETCH_DRONE_DATA,
+      type: actions.FETCH_DRONE,
     })
   )
 });
